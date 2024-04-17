@@ -1462,7 +1462,7 @@ class KOBOTOUCH(KOBO):
     SAGE_PRODUCT_ID     = [0x4231]
     TOUCH_PRODUCT_ID    = [0x4163]
     TOUCH2_PRODUCT_ID   = [0x4224]
-    LIBRA_COLOR_PRODUCT_ID = [0x4237]
+    COLOUR_FAMILY_PRODUCT_ID = [0x4237]
     PRODUCT_ID          = AURA_PRODUCT_ID + AURA_EDITION2_PRODUCT_ID + \
                           AURA_HD_PRODUCT_ID + AURA_H2O_PRODUCT_ID + AURA_H2O_EDITION2_PRODUCT_ID + \
                           GLO_PRODUCT_ID + GLO_HD_PRODUCT_ID + \
@@ -1470,7 +1470,7 @@ class KOBOTOUCH(KOBO):
                           AURA_ONE_PRODUCT_ID + CLARA_HD_PRODUCT_ID + FORMA_PRODUCT_ID + LIBRA_H2O_PRODUCT_ID + \
                           NIA_PRODUCT_ID + ELIPSA_PRODUCT_ID + \
                           SAGE_PRODUCT_ID + LIBRA2_PRODUCT_ID + CLARA_2E_PRODUCT_ID + ELIPSA_2E_PRODUCT_ID + \
-                          LIBRA_COLOR_PRODUCT_ID
+                          COLOUR_FAMILY_PRODUCT_ID
 
     BCD = [0x0110, 0x0326, 0x401, 0x409]
 
@@ -3600,6 +3600,9 @@ class KOBOTOUCH(KOBO):
     def isTouch2(self):
         return self.detected_device.idProduct in self.TOUCH2_PRODUCT_ID
 
+    def isColourFamily(self):
+        return self.detected_device_idProduct in self.COLOUR_FAMILY_PRODUCT_ID
+
     def cover_file_endings(self):
         if self.isAura():
             _cover_file_endings = self.AURA_COVER_FILE_ENDINGS
@@ -3691,6 +3694,10 @@ class KOBOTOUCH(KOBO):
             device_name = 'Kobo Touch'
         elif self.isTouch2():
             device_name = 'Kobo Touch 2'
+        elif self.isColourFamily():
+            device_name = 'Kobo Colour Family'
+        else:
+            device_name = 'Unnamed Kobo Device'
         self.__class__.gui_name = device_name
         return device_name
 
